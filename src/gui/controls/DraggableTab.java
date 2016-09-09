@@ -2,8 +2,11 @@ package gui.controls;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import insidefx.undecorator.Undecorator;
 import javafx.collections.ListChangeListener;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
@@ -12,6 +15,7 @@ import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -20,14 +24,13 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import jfxtras.scene.control.gauge.linear.SimpleMetroArcGauge;
 
 /**
- * A draggable tab that can optionally be detached from its tab pane and shown
- * in a separate window. This can be added to any normal TabPane, however a
- * TabPane with draggable tabs must *only* have DraggableTabs, normal tabs and
- * DrragableTabs mixed will cause issues!
- * <p>
- * @author Michael Berry
+ * Ein ziehbarer Tab, der aus der TabView rausgezogen werden kann, innerhalb der TabView verschoben werden kann
+ * oder in ein neues Fenster und zurück geschoben werden kann. Wichtig ist es sicherzugehen, dass
+ * DraggableTabs nicht zusammen mit normalen Tabs benutzt werden sollten um Konflikte zu vermeiden!!
+ * @author pmoritzer
  */
 public class DraggableTab extends Tab {
 
@@ -48,24 +51,27 @@ public class DraggableTab extends Tab {
     }
 
     /**
-     * Create a new draggable tab. This can be added to any normal TabPane,
-     * however a TabPane with draggable tabs must *only* have DraggableTabs,
-     * normal tabs and DrragableTabs mixed will cause issues!
-     * <p>
-     * @param text the text to appear on the tag label.
+     * Erzeugung des Tabs 
+     * 
+     * @param text Der Text, der auf dem Tab stehen soll
      */
     public DraggableTab(String text) {
         nameLabel = new Label(text);
         setGraphic(nameLabel);
         detachable = true;
         dragStage = new Stage();
-        dragStage.initStyle(StageStyle.UNDECORATED);
+        dragStage.initStyle(StageStyle.TRANSPARENT);
         StackPane dragStagePane = new StackPane();
-        dragStagePane.setStyle("-fx-background-color:#DDDDDD;");
+        dragStagePane.setStyle("-fx-background-color:transparent;");
         dragText = new Text(text);
         StackPane.setAlignment(dragText, Pos.CENTER);
         dragStagePane.getChildren().add(dragText);
-        dragStage.setScene(new Scene(dragStagePane));
+        Scene scene = new Scene(dragStagePane);
+        scene.getStylesheets().add("skin/undecorator.css");
+		scene.getStylesheets().add("resources/css/style.css");
+		scene.getStylesheets().add(SimpleMetroArcGauge.segmentColorschemeCSSPath());
+        dragStage.setScene(scene);
+        
         nameLabel.setOnMouseDragged(new EventHandler<MouseEvent>() {
 
             @Override
@@ -133,6 +139,34 @@ public class DraggableTab extends Tab {
                     }
                     final Stage newStage = new Stage();
                     final TabPane pane = new TabPane();
+                    pane.setOnDragEntered(new EventHandler<DragEvent>() {
+
+						@Override
+						public void handle(DragEvent event) {
+							// TODO Auto-generated method stub
+							
+						}});
+                    pane.setMinWidth(600);
+            		pane.setMinHeight(800);
+            		pane.setPadding(new Insets(50, 0,0,0));
+            		pane.setOnDragEntered(new EventHandler<DragEvent>() {
+
+						@Override
+						public void handle(DragEvent event) {
+							
+						}});
+            		Undecorator undecorator = new Undecorator(newStage, pane);
+            		undecorator.setOnDragEntered(new EventHandler<DragEvent>() {
+
+						@Override
+						public void handle(DragEvent event) {
+							// TODO Auto-generated method stub
+							
+						}
+            			
+            		});
+
+                    pane.setStyle("-fx-background-color: transparent");
                     tabPanes.add(pane);
                     newStage.setOnHiding(new EventHandler<WindowEvent>() {
 
@@ -152,8 +186,14 @@ public class DraggableTab extends Tab {
                             }
                         }
                     });
-                    newStage.setScene(new Scene(pane));
-                    newStage.initStyle(StageStyle.UTILITY);
+                    Scene scene = new Scene(undecorator);
+                    scene.getStylesheets().add("skin/undecorator.css");
+            		scene.getStylesheets().add("resources/css/style.css");
+            		scene.getStylesheets().add(SimpleMetroArcGauge.segmentColorschemeCSSPath());
+            		
+            		
+                    newStage.setScene(scene);
+                    newStage.initStyle(StageStyle.TRANSPARENT);
                     newStage.setX(t.getScreenX());
                     newStage.setY(t.getScreenY());
                     newStage.show();
@@ -166,20 +206,18 @@ public class DraggableTab extends Tab {
     }
 
     /**
-     * Set whether it's possible to detach the tab from its pane and move it to
-     * another pane or another window. Defaults to true.
-     * <p>
-     * @param detachable true if the tab should be detachable, false otherwise.
+     * Stellt sicher, dass der Tab gelöst werden kann
+     * 
+     * @param detachable true = lösbar, false = fest
      */
     public void setDetachable(boolean detachable) {
         this.detachable = detachable;
     }
 
     /**
-     * Set the label text on this draggable tab. This must be used instead of
-     * setText() to set the label, otherwise weird side effects will result!
-     * <p>
-     * @param text the label text for this tab.
+     * Ersetzt die setText methode, da setText nicht mit dem Drag klarkommt
+     * 
+     * @param text setzt den Text des Tabs
      */
     public void setLabelText(String text) {
         nameLabel.setText(text);

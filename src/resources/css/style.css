@@ -1,6 +1,7 @@
 .root {
 
    -fx-font-family: "Lucida Grande";
+  
 }
 
 .scroll-pane > .viewport {
@@ -19,6 +20,12 @@
 .thumb:hover {
 
     -fx-background-color: #ff8080;
+}
+
+.thumb:pressed {
+
+    -fx-background-color: #ff8080;
+
 }
 
 .increment {
@@ -45,6 +52,17 @@
 #trainerbutton:pressed {
 
     -fx-background-color: #8b0000;
+
+}
+
+#radar {
+
+    -fx-opacity: 0.5;
+
+}
+#radar:hover {
+
+    -fx-opacity: 1;
 
 }
 

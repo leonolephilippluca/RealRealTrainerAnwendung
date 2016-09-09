@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import jfxtras.scene.control.gauge.linear.SimpleMetroArcGauge;
+import mockup.Controller;
 
 /**
  * 
@@ -33,12 +34,15 @@ public class Main extends Application {
 
 	/**
 	 * JavaFX Startmethode. Initialisierung der Stage, setzen der Boundaries und
-	 * diverse kleine Initialisierungen und styling.
+	 * diverse kleine Initialisierungen und Styling.
 	 * 
 	 */
 	@Override
 	public void start(final Stage stage) throws Exception {
 
+		//TODO: Remove bei Backendanbindung
+		Controller.fillTestData();
+		
 		TrainerBorderPane root = new TrainerBorderPane();
 		root.setMinWidth(1200);
 		root.setMinHeight(800);

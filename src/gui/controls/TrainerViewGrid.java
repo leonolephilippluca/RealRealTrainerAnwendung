@@ -20,6 +20,9 @@ public class TrainerViewGrid extends VBox {
 
 	}
 
+	/**
+	 * Methode um Größe und Abstand der jeweiligen Komponenten festzulegen
+	 */
 	private void setBoundaries() {
 
 		setAlignment(Pos.CENTER);
@@ -29,6 +32,9 @@ public class TrainerViewGrid extends VBox {
 
 	}
 
+	/**
+	 * Methode zum initialisieren der Komponenten
+	 */
 	private void initializeComponents(Trainer t) {
 
 		getChildren().add(listBox(fatLabel("Name"), new Separator(), dataText(t.getName())));
@@ -54,6 +60,7 @@ public class TrainerViewGrid extends VBox {
 	private SimpleMetroArcGauge radar(int experience) {
 
 		SimpleMetroArcGauge x = new SimpleMetroArcGauge();
+		x.setId("radar");
 
 		// x.setPadding(new Insets(200, 0, 0, 0));
 
@@ -63,7 +70,6 @@ public class TrainerViewGrid extends VBox {
 		x.setMinValue(0);
 		x.setMaxValue(10);
 
-//		PercentSegment percentSegment = new PercentSegment(x, 0, 0.01);
 		PercentSegment percentSegment2 = new PercentSegment(x, 0.02, 9.99);
 		PercentSegment percentSegment3 = new PercentSegment(x, 10, 19.99);
 		PercentSegment percentSegment4 = new PercentSegment(x, 20, 29.99);
@@ -75,7 +81,6 @@ public class TrainerViewGrid extends VBox {
 		PercentSegment percentSegment10 = new PercentSegment(x, 80, 89.99);
 		PercentSegment percentSegment11 = new PercentSegment(x, 90, 100);
 
-//		x.segments().add(percentSegment);
 		x.segments().add(percentSegment2);
 		x.segments().add(percentSegment3);
 		x.segments().add(percentSegment4);

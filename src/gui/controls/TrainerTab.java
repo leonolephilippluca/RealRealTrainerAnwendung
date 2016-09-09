@@ -1,5 +1,6 @@
 package gui.controls;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import mockup.Trainer;
@@ -15,11 +16,18 @@ public class TrainerTab extends TabPane {
 		
 	}
 
+	/**
+	 * Methode um Größe und Abstand der jeweiligen Komponenten festzulegen
+	 */
 	private void setBoundaries() {
 		
+		setPadding(new Insets(37.5, 0, 0, 0));
 //		setStyle("-fx-background-color: transparent; -fx-border-style: solid; -fx-border-width: 2px; -fx-border-color: transparent transparent transparent gray;");
 	}
 
+	/**
+	 * Methode zum initialisieren der Komponenten
+	 */
 	private void initializeComponents() {
 		
 	}

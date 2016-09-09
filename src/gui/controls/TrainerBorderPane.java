@@ -10,13 +10,19 @@ public class TrainerBorderPane extends BorderPane {
 		setBoundaries();
 		initializeComponents();
 	}
-
+	
+	/**
+	 * Methode um Größe und Abstand der jeweiligen Komponenten festzulegen
+	 */
 	private void setBoundaries() {
 
 		setStyle("-fx-background-color: transparent;");
 
 	}
 
+	/**
+	 * Methode zum initialisieren der Komponenten
+	 */
 	private void initializeComponents() {
 		//
 		setLeft(new VBoxLeft());

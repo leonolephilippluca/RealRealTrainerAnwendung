@@ -33,13 +33,13 @@ public class Controller {
 		trainerlist.add(new Trainer(1, "Omega Eins", 52, 1));
 		trainerlist.add(new Trainer(2, "Omega Zwei", 52, 2));
 		trainerlist.add(new Trainer(3, "Omega Drei", 52, 3));
-		trainerlist.add(new Trainer(3, "Omega Vier", 52, 4));
-		trainerlist.add(new Trainer(3, "Omega Fünf", 52, 5));
-		trainerlist.add(new Trainer(3, "Omega Sechs", 52, 6));
-		trainerlist.add(new Trainer(3, "Omega Sieben", 52, 7));
-		trainerlist.add(new Trainer(3, "Omega Acht", 52, 8));
-		trainerlist.add(new Trainer(3, "Omega Neun", 52, 9));
-		trainerlist.add(new Trainer(3, "Omega Zehn", 52, 10));
+		trainerlist.add(new Trainer(4, "Omega Vier", 52, 4));
+		trainerlist.add(new Trainer(5, "Omega Fünf", 52, 5));
+		trainerlist.add(new Trainer(6, "Omega Sechs", 52, 6));
+		trainerlist.add(new Trainer(7, "Omega Sieben", 52, 7));
+		trainerlist.add(new Trainer(8, "Omega Acht", 52, 8));
+		trainerlist.add(new Trainer(9, "Omega Neun", 52, 9));
+		trainerlist.add(new Trainer(10, "Omega Zehn", 52, 10));
 	}
 
 }

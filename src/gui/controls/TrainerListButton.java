@@ -14,16 +14,21 @@ public class TrainerListButton extends HBox {
 		setBoundaries();
 		initializeComponents(t);
 	}
-
+	
+	/**
+	 * Methode um Größe und Abstand der jeweiligen Komponenten festzulegen
+	 */
 	private void setBoundaries() {
 
 		setPadding(new Insets(10, 25, 0, 25));
-		// setStyle("-fx-base: #ff8080; -fx-background-opacity: 0.5");
 
 		setAlignment(Pos.CENTER);
 
 	}
 
+	/**
+	 * Methode zum initialisieren der Komponenten
+	 */
 	private void initializeComponents(Trainer t) {
 
 		Button b = mainButton(t);
@@ -44,6 +49,9 @@ public class TrainerListButton extends HBox {
 			public void handle(ActionEvent e) {
 
 				TrainerTab.getInstance().addNewTab(t);
+				//FIXME: irgendwie unschön, aber vorübergehend brauchbar.
+				TrainerBorderPane pane = (TrainerBorderPane) getParent().getParent().getParent().getParent().getParent().getParent();
+				pane.setCenter(TrainerTab.getInstance());
 
 			}
 
